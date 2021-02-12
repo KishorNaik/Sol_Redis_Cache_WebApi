@@ -1,0 +1,32 @@
+﻿download redis 
+https://github.com/microsoftarchive/redis/releases/tag/win-3.0.504
+
+--Config
+https://markmcgookin.com/2020/01/15/azure-redis-cache-no-endpoints-specified-error-in-dotnet-core/
+
+Step 1:
+Download package from nuget
+Microsoft.Extensions.Caching.StackExchangeRedis
+
+Step 2:
+Navigate to startup.cs/ConfigureServices method and add the following.
+
+RedisLab and Azure Redis cache Config
+services.AddStackExchangeRedisCache((setup) =>
+{
+    setup.InstanceName = "redis instance name";
+    setup.ConfigurationOptions = new StackExchange.Redis.ConfigurationOptions()
+    {
+        EndPoints = { "redis endpoint" },
+        Password = "redis Database Password"
+    };
+});
+
+ // localHost
+services.AddStackExchangeRedisCache((setup) =>
+{
+    setup.Configuration = "localhost:6379";
+});
+
+Step 3:
+maintain cache. (Check Demo Controller code)
